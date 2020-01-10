@@ -1,12 +1,13 @@
 const express = require('express')
 const app = express()
 
-app.get('/', function (req, res) {
-    res.send("hello world!")
-})
+app.use(express.static(__dirname + '/public'));
+app.engine('html', require('ejs').__express);
+app.set('views', __dirname + '/views');
+app.set('view engine', 'ejs');
 
-app.get('/min/baboo', (req, res) => {
-    res.send("드디어 해냈다!")
+app.get('/', (req, res) => {
+    res.render('view.ejs')
 })
 
 app.listen(3000, function () {
